@@ -1,0 +1,28 @@
+
+//Given a number, write a function to output its reverse digits. (e.g. given 123 the answer is 321) Numbers should preserve their sign; i.e.
+// a negative number should still be negative when reversed.
+// * Examples
+//         * 123 ->  321
+//         * -456 -> -654
+//         * 1000 ->    1
+
+public class ReverseNum {
+    public static int reverseNum(int digit){
+        int reversed = 0;
+        while (digit !=0) {
+            reversed = reversed * 10 + digit % 10;
+            digit /= 10;
+        }
+        return reversed;
+    }
+
+    public static void main(String[] args) {
+        int number = 123456;
+        int reversedNumber= reverseNum(number);
+        System.out.println("Original number: " + number);
+        System.out.println("Reversed number: " + reversedNumber);
+
+    }
+
+}
+
