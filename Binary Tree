@@ -1,0 +1,93 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+public class Solution {
+    public void flatten(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        flatten(root.left);
+        flatten(root.right);
+
+        // Store the right subtree in a temporary variable
+        TreeNode rightSubtree = root.right;
+
+        // Make the left subtree as the new right subtree
+        root.right = root.left;
+        root.left = null;
+
+        // Find the rightmost node in the new right subtree
+        TreeNode rightmost = root;
+        while (rightmost.right != null) {
+            rightmost = rightmost.right;
+        }
+
+        // Attach the original right subtree to the rightmost node
+        rightmost.right = rightSubtree;
+    }
+
+    // Helper method to print the linked list
+    public static void printList(TreeNode head) {
+        TreeNode current = head;
+        while (current != null) {
+            System.out.print(current.val + " -> ");
+            current = current.right;
+        }
+        System.out.println("null");
+    }
+
+    // Helper method to print the tree structure using level-order traversal
+    public static void printTree(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            System.out.print(node.val + " ");
+
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(5);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.right.right = new TreeNode(6);
+
+        System.out.println("Original tree:");
+        printTree(root);
+
+        solution.flatten(root);
+
+        System.out.println("\nFlattened linked list:");
+        printList(root);
+    }
+}
