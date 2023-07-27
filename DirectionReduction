@@ -1,0 +1,52 @@
+//We are given directions to go from one point to another. The directions are "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too. Going one direction and coming back the opposite direction is a wasted effort, so let's concise these directions to go the shortest route.
+
+//For example, given the following directions: plan = ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]
+//You have to write a function dirReduc which will take an array of strings and returns an array of strings with the needless directions removed (W<->E or S<->N
+//side by side).
+
+package org.example;
+import java.util.*;
+    public class DirReduction {
+        public static String[] dirReduc(String[] arr) {
+            Stack<String> stack = new Stack<>();
+
+            for (String direction : arr) {
+                if (!stack.isEmpty() && isOpposite(stack.peek(), direction)) {
+                    stack.pop();
+                } else {
+                    stack.push(direction);
+                }
+            }
+            return stack.toArray(new String[0]);
+        }
+
+        private static boolean isOpposite(String dir1, String dir2) {
+            return (dir1.equals("NORTH") && dir2.equals("SOUTH")) ||
+                    (dir1.equals("SOUTH") && dir2.equals("NORTH")) ||
+                    (dir1.equals("EAST") && dir2.equals("WEST")) ||
+                    (dir1.equals("WEST") && dir2.equals("EAST"));
+        }
+
+        public static void main(String[] args) {
+            String [] d1 = {"NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"};
+            String [] r1 = dirReduc(d1);
+            System.out.println(Arrays.toString(r1));
+
+            String[] d2 = {"NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH"};
+            String[] r2 = dirReduc(d2);
+            System.out.println(Arrays.toString(r2));
+
+            String[] d3 = {"NORTH", "WEST", "SOUTH", "EAST"};
+            String[] r3 = dirReduc(d3);
+            System.out.println(Arrays.toString(r3));
+
+        }
+    }
+
+
+
+
+
+
+
+
