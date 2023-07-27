@@ -1,0 +1,66 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        
+    
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
+
+        ListNode current = head;
+        ListNode prev = null;
+
+        while (current != null) {
+            if (current.val == val) {
+                // Skip the current node and remove it from the list
+                prev.next = current.next;
+            } else {
+                // Move to the next node
+                prev = current;
+            }
+            current = current.next;
+        }
+
+        return head;
+    }
+
+    // Helper method to print the linked list
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(6);
+        head.next.next.next = new ListNode(3);
+        head.next.next.next.next = new ListNode(4);
+        head.next.next.next.next.next = new ListNode(5);
+        head.next.next.next.next.next.next = new ListNode(6);
+
+        System.out.println("Original list:");
+        printList(head);
+
+        int val = 6;
+        ListNode newHead = solution.removeElements(head, val);
+
+        System.out.println("\nAfter removing nodes with value " + val + ":");
+        printList(newHead);
+    }
+}
+
