@@ -1,0 +1,32 @@
+public class Solution {
+    public void duplicateZeros(int[] arr) {
+        int n = arr.length;
+        int i = 0;
+
+        while (i < n - 1) {
+            if (arr[i] == 0) {
+                // Shift elements to the right
+                for (int j = n - 1; j > i; j--) {
+                    arr[j] = arr[j - 1];
+                }
+
+                // Place the duplicated zero
+                arr[i + 1] = 0;
+                i += 2; // Skip the duplicated zero to avoid infinite loop if consecutive zeros are present
+            } else {
+                i++;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 0, 2, 3, 0, 4, 5, 0};
+        Solution solution = new Solution();
+        solution.duplicateZeros(arr);
+
+        // Print the modified array
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
