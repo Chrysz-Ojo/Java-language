@@ -1,0 +1,35 @@
+class Solution {
+//public class DominoRotations {
+    public int minDominoRotations(int[] tops, int[] bottoms) {
+        int n = tops.length;
+        int[] topFreq = new int[7];
+        int[] bottomFreq = new int[7];
+
+        // Count the frequency of each number in tops and bottoms arrays
+        for (int i = 0; i < n; i++) {
+            topFreq[tops[i]]++;
+            bottomFreq[bottoms[i]]++;
+        }
+
+        // Check if any number appears as frequently as the total number of dominos
+        for (int num = 1; num <= 6; num++) {
+            if (topFreq[num] + bottomFreq[num] >= n) {
+                int topRotations = n - topFreq[num]; // Rotations needed to make all tops equal to num
+                int bottomRotations = n - bottomFreq[num]; // Rotations needed to make all bottoms equal to num
+                return Math.min(topRotations, bottomRotations);
+            }
+        }
+
+        return -1; // If no number can be made equal in tops or bottoms, return -1
+    }
+
+    public static void main(String[] args) {
+        int[] tops = {2, 1, 2, 4, 2, 2};
+        int[] bottoms = {5, 2, 6, 2, 3, 2};
+        Solution solution = new Solution();
+        int minRotations = solution.minDominoRotations(tops, bottoms);
+        System.out.println("Minimum number of rotations: " + minRotations);
+    }
+}
+
+        
