@@ -1,0 +1,47 @@
+class Solution {
+    public TreeNode balanceBST(TreeNode root) {
+    
+        // Step 1: Get the sorted list of node values using in-order traversal
+        List<Integer> sortedList = new ArrayList<>();
+        inOrderTraversal(root, sortedList);
+
+        // Step 2: Construct a balanced binary search tree from the sorted list
+        return constructBalancedBST(sortedList, 0, sortedList.size() - 1);
+    }
+
+    // In-order traversal to get the sorted list of node values
+    private void inOrderTraversal(TreeNode node, List<Integer> sortedList) {
+        if (node == null)
+            return;
+
+        inOrderTraversal(node.left, sortedList);
+        sortedList.add(node.val);
+        inOrderTraversal(node.right, sortedList);
+    }
+
+    // Helper method to construct the balanced binary search tree
+    private TreeNode constructBalancedBST(List<Integer> sortedList, int left, int right) {
+        if (left > right)
+            return null;
+
+        int mid = (left + right) / 2;
+        TreeNode node = new TreeNode(sortedList.get(mid));
+        node.left = constructBalancedBST(sortedList, left, mid - 1);
+        node.right = constructBalancedBST(sortedList, mid + 1, right);
+        return node;
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        // Construct the original binary search tree
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(4);
+        root.left.right = new TreeNode(2);
+
+        Solution solution = new Solution();
+        TreeNode balancedRoot = solution.balanceBST(root);
+
+        // Perform any operations on the balanced binary search tree as needed
+    }
+}
