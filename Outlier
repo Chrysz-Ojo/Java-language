@@ -1,0 +1,44 @@
+package org.example;
+import java.util.ArrayList;
+import java.util.ArrayList;
+
+public class FinderOutlier {
+    //public static class Challenge {
+        public static void main(String[] args) {
+            ArrayList<Integer> integers = new ArrayList<>();
+            integers.add(2);
+            integers.add(4);
+            integers.add(7);
+            integers.add(6);
+            integers.add(8);
+
+            int outlier = findOutlier(integers);
+            System.out.println("Outlier: " + outlier);
+        }
+    }
+
+    public static int findOutlier(ArrayList<Integer> integers) {
+        int evenCount = 0;
+        int oddCount = 0;
+        int outlier = 0;
+
+        for (int num : integers) {
+            if (num % 2 == 0) {
+                evenCount++;
+            } else {
+                oddCount++;
+            }
+        }
+
+        boolean isEvenMajority = evenCount > oddCount;
+
+        for (int num : integers) {
+            if ((isEvenMajority && num % 2 != 0) || (!isEvenMajority && num % 2 == 0)) {
+                outlier = num;
+                break;
+            }
+        }
+
+        return outlier;
+    }
+}
