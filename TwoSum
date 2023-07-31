@@ -1,0 +1,40 @@
+package org.example;
+import java.util.HashMap;
+import java.util.Map;
+
+    public class TwoSum {
+
+        public int[] twoSum(int[] nums, int target) {
+            // Create a HashMap to store the elements and their indices
+            Map<Integer, Integer> map = new HashMap<>();
+
+            // Iterate through the array
+            for (int i = 0; i < nums.length; i++) {
+                int complement = target - nums[i];
+                if (map.containsKey(complement)) {
+                    // Found the pair
+                    return new int[] { map.get(complement), i };
+                }
+                // Put the current element and its index in the map
+                map.put(nums[i], i);
+            }
+
+            // If no pair is found, return an empty array or null to indicate failure
+            return new int[0];
+        }
+
+        public static void main(String[] args) {
+            int[] nums = {3, 2, 4};
+            int target = 6;
+            TwoSum twoSum = new TwoSum();
+            int[] result = twoSum.twoSum(nums, target);
+            if (result.length == 2) {
+                System.out.println("Indices of the two numbers: [" + result[0] + ", " + result[1] + "]");
+                System.out.println("Numbers: " + nums[result[0]] + ", " + nums[result[1]]);
+            } else {
+                System.out.println("No such pair found.");
+            }
+        }
+    }
+
+
