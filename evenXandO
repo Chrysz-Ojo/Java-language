@@ -1,0 +1,20 @@
+public class Challenge {
+    public static boolean evenXAndO(String str) {
+        int countX = 0;
+        int countO = 0;
+
+        for (char ch : str.toCharArray()) {
+            if (ch == 'x' || ch == 'X') {
+                countX++;
+            } else if (ch == 'o' || ch == 'O') {
+                countO++;
+            }
+        }
+
+        return countX == countO;
+    
+      
+    
+       
+    }
+}
