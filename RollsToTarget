@@ -1,0 +1,43 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    private static final int MOD = 1_000_000_007;
+
+    public int numRollsToTarget(int n, int k, int target) {
+        Map<String, Integer> memo = new HashMap<>();
+        return countWays(n, k, target, memo);
+    }
+
+    private int countWays(int n, int k, int target, Map<String, Integer> memo) {
+        if (n == 0 && target == 0) {
+            return 1; // Base case: target sum achieved with all dice used
+        }
+
+        if (n == 0 || target <= 0) {
+            return 0; // Base case: out of dice or target sum not possible
+        }
+
+        String key = n + "-" + target;
+        if (memo.containsKey(key)) {
+            return memo.get(key);
+        }
+
+        int ways = 0;
+        for (int face = 1; face <= k; face++) {
+            ways = (ways + countWays(n - 1, k, target - face, memo)) % MOD;
+        }
+
+        memo.put(key, ways);
+        return ways;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int n = 1;
+        int k = 6;
+        int target = 3;
+        int ways = solution.numRollsToTarget(n, k, target);
+        System.out.println(ways); // Output: 1
+    }
+}
