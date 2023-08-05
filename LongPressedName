@@ -1,0 +1,34 @@
+class Solution {
+    public boolean isLongPressedName(String name, String typed) {
+        int i = 0; 
+        int j = 0; 
+
+        while (j < typed.length()) {
+            if (i < name.length() && name.charAt(i) == typed.charAt(j)) {
+                
+                i++;
+                j++;
+            } else if (j > 0 && typed.charAt(j) == typed.charAt(j - 1)) {
+                // Current character in typed is a long press, move typed pointer
+                j++;
+            } else {
+                // Mismatch found, return false
+                return false;
+            }
+        }
+
+        // Check if there are any remaining characters in name
+        return i == name.length();
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        String name = "alex";
+        String typed = "aaleex";
+        Solution solution = new Solution();
+        boolean result = solution.isLongPressedName(name, typed);
+        System.out.println(result); // Output: true
+    }
+}
+
+        
