@@ -1,0 +1,37 @@
+class Solution {
+    public int minReorder(int n, int[][] connections) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        for (int[] conn : connections) {
+            graph.get(conn[0]).add(conn[1]); 
+            graph.get(conn[1]).add(-conn[0]);
+        }
+
+        return dfs(0, graph, new boolean[n]);
+    }
+
+    private int dfs(int city, List<List<Integer>> graph, boolean[] visited) {
+        visited[city] = true;
+        int edgesChanged = 0;
+
+        for (int neighbor : graph.get(city)) {
+            if (!visited[Math.abs(neighbor)]) {
+                edgesChanged += (neighbor > 0) ? 1 : 0;
+                edgesChanged += dfs(Math.abs(neighbor), graph, visited);
+            }
+        }
+
+        return edgesChanged;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int n = 6;
+        int[][] connections = {{0, 1}, {1, 3}, {2, 3}, {4, 0}, {4, 5}};
+        int result = solution.minReorder(n, connections);
+        System.out.println(result); // Output: 3
+    }
+}
