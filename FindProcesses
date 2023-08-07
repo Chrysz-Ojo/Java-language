@@ -1,0 +1,71 @@
+import java.util.*;
+
+public class Challenge {
+
+    public static List<String> findProcesses(
+        String startItem,
+        String endItem,
+        List<String> tasks
+    ) {
+        Map<String, List<ProcessItem>> itemToProcesses = new HashMap<>();
+
+        for (String task : tasks) {
+            String[] parts = task.split(":");
+            String process = parts[0];
+            String fromItem = parts[1];
+            String toItem = parts[2];
+            itemToProcesses.putIfAbsent(fromItem, new ArrayList<>());
+            itemToProcesses.get(fromItem).add(new ProcessItem(process, toItem));
+        }
+
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(startItem, new ArrayList<>()));
+
+        Set<String> visited = new HashSet<>();
+        visited.add(startItem);
+
+        while (!queue.isEmpty()) {
+            Pair pair = queue.poll();
+            String currentItem = pair.item;
+            List<String> processes = pair.processes;
+
+            if (currentItem.equals(endItem)) {
+                return processes;
+            }
+
+            List<ProcessItem> nextProcesses = itemToProcesses.getOrDefault(currentItem, new ArrayList<>());
+            for (ProcessItem processItem : nextProcesses) {
+                String nextItem = processItem.item;
+                if (!visited.contains(nextItem)) {
+                    List<String> nextProcessesList = new ArrayList<>(processes);
+                    nextProcessesList.add(processItem.process);
+                    queue.add(new Pair(nextItem, nextProcessesList));
+                    visited.add(nextItem);
+                }
+            }
+        }
+
+        return Collections.emptyList();
+    }
+
+    private static class ProcessItem {
+        String process;
+        String item;
+
+        public ProcessItem(String process, String item) {
+            this.process = process;
+            this.item = item;
+        }
+    }
+
+    private static class Pair {
+        String item;
+        List<String> processes;
+
+        public Pair(String item, List<String> processes) {
+            this.item = item;
+            this.processes = processes;
+        }
+    }
+
+}
