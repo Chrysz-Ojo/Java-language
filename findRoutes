@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Challenge {
+
+    public static String findRoutes(ArrayList<ArrayList<String>> routes) {
+        Map<String, String> graph = new HashMap<>();
+        
+        // Build the graph using the given routes
+        for (ArrayList<String> route : routes) {
+            String from = route.get(0);
+            String to = route.get(1);
+            graph.put(from, to);
+        }
+        
+        // Find the starting point (the place with no incoming route)
+        String start = null;
+        for (String place : graph.keySet()) {
+            if (!graph.values().contains(place)) {
+                start = place;
+                break;
+            }
+        }
+        
+        // Traverse the graph to find the complete route
+        List<String> route = new ArrayList<>();
+        String currentPlace = start;
+        while (currentPlace != null) {
+            route.add(currentPlace);
+            currentPlace = graph.get(currentPlace);
+        }
+        
+        return String.join(", ", route);
+    }
+
+}
