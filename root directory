@@ -1,0 +1,42 @@
+import java.util.Stack;
+
+class Solution {
+    public int lengthLongestPath(String input) {
+        String[] items = input.split("\n");
+        Stack<Integer> stack = new Stack<>();
+        int maxLength = 0;
+        
+        for (String item : items) {
+            int level = countTabs(item);
+            while (stack.size() > level) {
+                stack.pop();
+            }
+            
+            int length = (stack.isEmpty() ? 0 : stack.peek()) + item.length() - level + 1;
+            stack.push(length);
+            
+            if (item.contains(".")) { 
+                maxLength = Math.max(maxLength, length - 1);
+            }
+        }
+        
+        return maxLength;
+    }
+    
+    private int countTabs(String s) {
+        int count = 0;
+        int i = 0;
+        while (i < s.length() && s.charAt(i) == '\t') {
+            count++;
+            i++;
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        String input = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext";
+        int output = solution.lengthLongestPath(input);
+        System.out.println(output);
+    }
+}
