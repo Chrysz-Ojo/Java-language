@@ -1,0 +1,24 @@
+class Solution {
+    public String licenseKeyFormatting(String s, int k) {
+        s = s.replaceAll("-", ""); 
+        s = s.toUpperCase(); 
+        int n = s.length();
+        int firstGroupLen = n % k != 0 ? n % k : k;
+        StringBuilder formattedKey = new StringBuilder(s.substring(0, firstGroupLen));
+
+        for (int i = firstGroupLen; i < n; i += k) {
+            formattedKey.append('-').append(s.substring(i, Math.min(i + k, n)));
+        }
+
+        return formattedKey.toString();
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        String s = "5F3Z-2e-9-w";
+        int k = 4;
+        String output = solution.licenseKeyFormatting(s, k);
+        System.out.println(output); // Output: "5F3Z-2E9W"
+    }
+}
