@@ -1,0 +1,30 @@
+import java.util.HashSet;
+import java.util.Set;
+
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        Set<String> uniqueEmails = new HashSet<>();
+
+        for (String email : emails) {
+            String[] parts = email.split("@");
+            String localName = parts[0].split("\\+")[0].replace(".", "");
+            String processedEmail = localName + "@" + parts[1];
+            uniqueEmails.add(processedEmail);
+        }
+
+        return uniqueEmails.size();
+    }
+    
+    public static void main(String[] args) {
+        String[] emails = {
+            "test.email+alex@leetcode.com",
+            "test.e.mail+bob.cathy@leetcode.com",
+            "testemail+david@lee.tcode.com"
+        };
+
+        Solution solution = new Solution();
+        int result = solution.numUniqueEmails(emails);
+        System.out.println(result); // Output: 2
+    }
+}
+
