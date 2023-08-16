@@ -1,0 +1,25 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public boolean divisorGame(int n) {
+        Map<Integer, Boolean> memo = new HashMap<>();
+        return canWin(n, memo);
+    }
+    
+    private boolean canWin(int n, Map<Integer, Boolean> memo) {
+        if (memo.containsKey(n)) {
+            return memo.get(n);
+        }
+        
+        boolean result = false;
+        for (int x = 1; x < n; x++) {
+            if (n % x == 0) {
+                result |= !canWin(n - x, memo);
+            }
+        }
+        
+        memo.put(n, result);
+        return result;
+    }
+}
