@@ -1,0 +1,57 @@
+import java.util.Stack;
+
+class MyQueue {
+    private Stack<Integer> inputStack;
+    private Stack<Integer> outputStack;
+
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        inputStack = new Stack<>();
+        outputStack = new Stack<>();
+    }
+    
+    /** Push element x to the back of the queue. */
+    public void push(int x) {
+        inputStack.push(x);
+    }
+    
+    /** Removes the element from the front of the queue and returns it. */
+    public int pop() {
+        if (outputStack.isEmpty()) {
+            while (!inputStack.isEmpty()) {
+                outputStack.push(inputStack.pop());
+            }
+        }
+        return outputStack.pop();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        if (outputStack.isEmpty()) {
+            while (!inputStack.isEmpty()) {
+                outputStack.push(inputStack.pop());
+            }
+        }
+        return outputStack.peek();
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return inputStack.isEmpty() && outputStack.isEmpty();
+    }
+    
+    public static void main(String[] args) {
+        MyQueue queue = new MyQueue();
+        
+        queue.push(1);
+        queue.push(2);
+        int peekResult = queue.peek();
+        System.out.println("Peek: " + peekResult); // Output: 1
+        
+        int popResult = queue.pop();
+        System.out.println("Pop: " + popResult);   // Output: 1
+        
+        boolean isEmpty = queue.empty();
+        System.out.println("Is Empty: " + isEmpty); // Output: false
+    }
+}
