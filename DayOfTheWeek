@@ -1,0 +1,28 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+class Solution {
+    public String dayOfTheWeek(int day, int month, int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, day); 
+
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
+        Date date = calendar.getTime();
+        String dayOfWeek = dateFormat.format(date);
+
+        return dayOfWeek;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        int day = 31;
+        int month = 8;
+        int year = 2019;
+        
+        String result = solution.dayOfTheWeek(day, month, year);
+        System.out.println(result); 
+    }
+}
