@@ -1,0 +1,74 @@
+import java.util.*;
+
+class Transaction {
+    String name;
+    int time;
+    int amount;
+    String city;
+    
+    public Transaction(String name, int time, int amount, String city) {
+        this.name = name;
+        this.time = time;
+        this.amount = amount;
+        this.city = city;
+    }
+}
+
+public class Solution {
+    public List<String> invalidTransactions(String[] transactions) {
+        List<Transaction> transactionList = new ArrayList<>();
+        
+        for (String transaction : transactions) {
+            String[] parts = transaction.split(",");
+            String name = parts[0];
+            int time = Integer.parseInt(parts[1]);
+            int amount = Integer.parseInt(parts[2]);
+            String city = parts[3];
+            transactionList.add(new Transaction(name, time, amount, city));
+        }
+        
+        Collections.sort(transactionList, Comparator.comparingInt(t -> t.time));
+        
+        List<String> invalidTransactions = new ArrayList<>();
+        
+        for (int i = 0; i < transactionList.size(); i++) {
+            Transaction currentTransaction = transactionList.get(i);
+            boolean isValid = true;
+            
+            if (currentTransaction.amount > 1000) {
+                isValid = false;
+            }
+            
+        
+            for (int j = i - 1; j >= 0; j--) {
+                Transaction prevTransaction = transactionList.get(j);
+                if (!prevTransaction.name.equals(currentTransaction.name)) {
+                    break;  
+                }
+                if (currentTransaction.time - prevTransaction.time <= 60 &&
+                    !currentTransaction.city.equals(prevTransaction.city)) {
+                    isValid = false;
+                    break;
+                }
+            }
+            
+            if (!isValid) {
+                invalidTransactions.add(
+                    currentTransaction.name + "," +
+                    currentTransaction.time + "," +
+                    currentTransaction.amount + "," +
+                    currentTransaction.city
+                );
+            }
+        }
+        
+        return invalidTransactions;
+    }
+
+    public static void main(String[] args) {
+        String[] transactions = {"alice,20,800,mtv", "alice,50,100,beijing"};
+        Solution solution = new Solution();
+        List<String> result = solution.invalidTransactions(transactions);
+        System.out.println(result);
+    }
+}
