@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class PartitionLabels {
+    public List<Integer> partitionLabels(String s) {
+        // Store the last occurrence of each character in the string
+        int[] lastOccurrence = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            lastOccurrence[s.charAt(i) - 'a'] = i;
+        }
+        
+        List<Integer> partitions = new ArrayList<>();
+        int start = 0; // Start of the current partition
+        int end = 0;   // End of the current partition
+        
+        for (int i = 0; i < s.length(); i++) {
+            int lastIndex = lastOccurrence[s.charAt(i) - 'a'];
+            end = Math.max(end, lastIndex); // Extend the current partition
+            
+            if (i == end) { // If we reach the end of the current partition
+                partitions.add(end - start + 1); // Add the partition size to the result
+                start = i + 1; // Start a new partition
+            }
+        }
+        
+        return partitions;
+    }
+
+    public static void main(String[] args) {
+        PartitionLabels solution = new PartitionLabels();
+        String s = "ababcbacadefegdehijhklij";
+        List<Integer> result = solution.partitionLabels(s);
+        System.out.println(result); // Output: [9, 7, 8]
+    }
+}
