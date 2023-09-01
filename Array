@@ -1,0 +1,61 @@
+package org.example;
+
+public class ArrayMedian {
+    //class Solution {
+        public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+            if (nums1.length > nums2.length) {
+                int[] temp = nums1;
+                nums1 = nums2;
+                nums2 = temp;
+            }
+
+            int m = nums1.length;
+            int n = nums2.length;
+            int totalLen = m + n;
+            boolean isEven = totalLen % 2 == 0;
+
+            int left = 0;
+            int right = m;
+
+            while (left <= right) {
+                int mid1 = (left + right) / 2;
+                int mid2 = (totalLen + 1) / 2 - mid1;
+
+                int maxLeft1 = (mid1 > 0) ? nums1[mid1 - 1] : Integer.MIN_VALUE;
+                int minRight1 = (mid1 < m) ? nums1[mid1] : Integer.MAX_VALUE;
+
+                int maxLeft2 = (mid2 > 0) ? nums2[mid2 - 1] : Integer.MIN_VALUE;
+                int minRight2 = (mid2 < n) ? nums2[mid2] : Integer.MAX_VALUE;
+
+                if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+                    // Median calculation
+                    if (isEven) {
+                        double median = (double)(Math.max(maxLeft1, maxLeft2) + Math.min(minRight1, minRight2)) / 2.0;
+                        return median;
+                    } else {
+                        return Math.max(maxLeft1, maxLeft2);
+                    }
+                } else if (maxLeft1 > minRight2) {
+                    // Move left in nums1
+                    right = mid1 - 1;
+                } else {
+                    // Move right in nums1
+                    left = mid1 + 1;
+                }
+            }
+
+            throw new IllegalArgumentException("Input arrays are not sorted.");
+
+        }
+
+    public static void main(String[] args) {
+            // Example input arrays
+            int[] nums1 = {6, 3, 6, 2};
+            int[] nums2 = {2, 4, 2, 5};
+
+            ArrayMedian arrayMedian = new ArrayMedian();
+            double median = arrayMedian.findMedianSortedArrays(nums1, nums2);
+            System.out.println("Median: " + median);
+        }
+    }
