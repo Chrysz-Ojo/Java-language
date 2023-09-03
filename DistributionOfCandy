@@ -1,0 +1,16 @@
+import java.util.HashSet;
+
+class Solution {
+    public int distributeCandies(int[] candyType) {
+        // Create a HashSet to store unique types of candies.
+        HashSet<Integer> uniqueCandies = new HashSet<>();
+        
+        // Add each candy type to the HashSet.
+        for (int candy : candyType) {
+            uniqueCandies.add(candy);
+        }
+        
+        // Return the minimum of unique candy types and n / 2.
+        return Math.min(uniqueCandies.size(), candyType.length / 2);
+    }
+}
