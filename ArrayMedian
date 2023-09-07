@@ -29,7 +29,7 @@ public class ArrayMedian {
                 int minRight2 = (mid2 < n) ? nums2[mid2] : Integer.MAX_VALUE;
 
                 if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
-                    // Median calculation
+                    //// Median calculation
                     if (isEven) {
                         double median = (double)(Math.max(maxLeft1, maxLeft2) + Math.min(minRight1, minRight2)) / 2.0;
                         return median;
