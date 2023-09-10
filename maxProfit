@@ -1,0 +1,28 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length <= 1) {
+            return 0; // If there are no prices or only one price, no profit can be made.
+        }
+
+        int minPrice = prices[0]; // Initialize the minimum price to the first day's price.
+        int maxProfit = 0; // Initialize the maximum profit to zero.
+
+        for (int i = 1; i < prices.length; i++) {
+            // If the current price is lower than the minimum price encountered so far,
+            // update the minimum price.
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else {
+                // If the current price is higher than the minimum price, calculate the
+                // potential profit by selling at the current price.
+                int potentialProfit = prices[i] - minPrice;
+                // If the potential profit is greater than the current max profit, update it.
+                if (potentialProfit > maxProfit) {
+                    maxProfit = potentialProfit;
+                }
+            }
+        }
+
+        return maxProfit;
+    }
+}
