@@ -4,7 +4,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Objects;
 import java.io.InputStreamReader;
-
     public class HttpRequestServer {
         static int portNumber = 2306;
         public void serverRequest() throws IOException {
