@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
             try(ServerSocket serverSocket = new ServerSocket(portNumber)) {
                 System.out.println("Server running on port " + portNumber);
                 while (true) {
+                    
                     // create a client server that helps the server listen for connection from another client server
                     try (Socket socket = serverSocket.accept()) {
                         // Read input from the client server
