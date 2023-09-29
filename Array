@@ -9,6 +9,7 @@ public class ArrayMedian {
                 nums1 = nums2;
                 nums2 = temp;
 
+
             }
 
             int m = nums1.length;
