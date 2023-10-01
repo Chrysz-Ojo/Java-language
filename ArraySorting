@@ -9,7 +9,7 @@ class Solution {
         // Count the occurrences of elements in arr1
         int[] counts = new int[1001];
         for (int num : arr1) {
-            counts[num]++;
+            counts[num]++; 
         }
 
         // Fill arr1 with elements based on their relative positions in arr2
