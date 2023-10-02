@@ -20,6 +20,7 @@ public class Solution {
             return;
         }
 
+
         flatten(root.left);
         flatten(root.right);
 
