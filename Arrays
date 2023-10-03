@@ -6,6 +6,7 @@ import java.util.Scanner;
 //create a program using arrays, that sorts a
   //      list of integers, in descending order.
 public class Main {
+
     public static void main(String[] args) {
         int[] unsortedArray = getRandomArray(5);
         System.out.println(Arrays.toString(unsortedArray));
