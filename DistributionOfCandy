@@ -2,7 +2,7 @@ import java.util.HashSet;
 
 class Solution {
     public int distributeCandies(int[] candyType) {
-        // Create a HashSet to store unique types of candies.
+        /// Create a HashSet to store unique types of candies.
         HashSet<Integer> uniqueCandies = new HashSet<>();
         
         // Add each candy type to the HashSet.
