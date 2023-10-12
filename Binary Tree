@@ -12,7 +12,7 @@
  *         this.right = right;
  *     }
  * }
- */////
+ */
 
 public class Solution {
     public void flatten(TreeNode root) {
