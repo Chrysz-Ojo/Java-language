@@ -5,7 +5,7 @@ class Solution {
         List<Integer> sortedList = new ArrayList<>();
         inOrderTraversal(root, sortedList);
 
-        // Step 2: Construct a balanced binary search tree from the sorted list
+        /// Step 2: Construct a balanced binary search tree from the sorted list
         return constructBalancedBST(sortedList, 0, sortedList.size() - 1);
     }
 
