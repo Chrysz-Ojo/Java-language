@@ -10,4 +10,4 @@ class CharacterType {
         }
         return i == bits.length - 1;
     }
-}
+}  
