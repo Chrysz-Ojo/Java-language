@@ -1,4 +1,4 @@
-public class Challenge {
+ public class Challenge {
     public static long findNextSquare(long num) {
         long sqrt = (long) Math.sqrt(num);
         if (sqrt * sqrt == num) {
