@@ -12,7 +12,7 @@ class Solution {
                 // Current character in typed is a long press, move typed pointer
                 j++;
             } else {
-                // Mismatch found, return false
+                //  Mismatch found, return false
                 return false;
             }
         }
