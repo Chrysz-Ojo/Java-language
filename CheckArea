@@ -1,4 +1,4 @@
- public class RectangleOverlap {
+public class RectangleOverlap {
     public static boolean isRectangleOverlap(int[] rec1, int[] rec2) {
         // Check if rec1 is to the left of rec2
         if (rec1[2] <= rec2[0]) {
