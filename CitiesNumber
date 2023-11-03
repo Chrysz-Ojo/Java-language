@@ -9,7 +9,7 @@ class Solution {
             graph.get(conn[0]).add(conn[1]); 
             graph.get(conn[1]).add(-conn[0]);
         }
-
+    
         return dfs(0, graph, new boolean[n]);
     }
 
