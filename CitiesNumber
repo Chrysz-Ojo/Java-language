@@ -4,7 +4,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             graph.add(new ArrayList<>());
         }
-
+ 
         for (int[] conn : connections) {
             graph.get(conn[0]).add(conn[1]); 
             graph.get(conn[1]).add(-conn[0]);
