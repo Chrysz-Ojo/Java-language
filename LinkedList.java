@@ -1,4 +1,4 @@
-  package org.example;
+package org.example;
 
 import java.util.LinkedList;
 import java.util.Scanner;
