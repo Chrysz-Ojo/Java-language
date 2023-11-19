@@ -1,5 +1,4 @@
- import java.util.PriorityQueue;
-
+import java.util.PriorityQueue;
 class KthLargest {
     private PriorityQueue<Integer> minHeap;
     private int k;
