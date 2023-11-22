@@ -4,7 +4,7 @@
 // * Examples
 //         * 123 ->  321
 //         * -456 -> -654
-//         * 1000 ->    1
+//        * 1000 ->    1
 
 public class ReverseNum {
     public static int reverseNum(int digit){
