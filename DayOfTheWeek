@@ -3,7 +3,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 class Solution {
-    public String dayOfTheWeek(int day, int month, int year) {
+     public String dayOfTheWeek(int day, int month, int year) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month - 1, day); 
 
