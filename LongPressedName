@@ -1,4 +1,4 @@
-   class Solution {
+     class Solution {
     public boolean isLongPressedName(String name, String typed) {
         int i = 0; 
         int j = 0; 
