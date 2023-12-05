@@ -8,7 +8,7 @@
         if (rec1[0] >= rec2[2]) {
             return false;
         }
-        // Check if rec1 is above rec2
+          // Check if rec1 is above rec2
         if (rec1[1] >= rec2[3]) {
             return false;
         }
