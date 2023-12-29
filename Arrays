@@ -2,7 +2,7 @@
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
+import java.util.S  canner;
 //create a program using arrays, that sorts a
   //      list of integers, in descending order.
 public class Main {
